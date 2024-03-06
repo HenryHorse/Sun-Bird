@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8325634242088670558}
   - component: {fileID: 8767851922274501913}
   - component: {fileID: 2416707515996443428}
+  - component: {fileID: 9217996744430975842}
   m_Layer: 3
   m_Name: Player(Placeholder)
   m_TagString: Player
@@ -209,6 +210,22 @@ MonoBehaviour:
   timeBetweenShooting: 1
   timeBetweenShots: 0.1
   bulletsPerTap: 2
-  ultimate: 0
-  allowUlt: 1
-  ultimateCD: 30
+--- !u!114 &9217996744430975842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3448960415641887789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b48b5976947db440be7679b2541fb4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UltimateCooldown: 30
+  StartOnCooldown: 0
+  RadialFlareBullet: {fileID: 6576326681740064337, guid: ae513ae3b944d924caa08a285783be88, type: 3}
+  RadialFlareBulletForce: 10
+  RadialFlareBulletCount: 100
+  RadialFlareMaxRotations: 3
+  RadialFlareDuration: 2

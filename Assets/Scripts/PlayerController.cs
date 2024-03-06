@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rigidbody;
     PlayerInput _playerInput;
     InputAction _moveAction;
+    PlayerUltimates _playerUltimates;
 
 
     Vector2 _move;
@@ -30,16 +31,12 @@ public class PlayerController : MonoBehaviour
     int _bulletsShot;
     private Vector3 mousePos;
 
-    public bool ultimate = false;
-    public bool allowUlt = true;
-    public float ultimateCD = 30f;
-    float ultimateTime = 10f;
-
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions["Move"];
+        _playerUltimates = GetComponent<PlayerUltimates>();
         _readyToShoot = true;
         if (Instance == null)
         {
@@ -59,11 +56,10 @@ public class PlayerController : MonoBehaviour
         //    animator.SetBool("move", false);
         //}
         MyInput();
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && allowUlt)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame &&
+            _playerUltimates.IsUltimateAvailable)
         {
-            allowUlt = false;
-            ultimate = true;
-            Invoke("ResetUltimate", ultimateTime);
+            StartCoroutine(_playerUltimates.CastRadialFlare());
         }
 
     }
@@ -136,16 +132,5 @@ public class PlayerController : MonoBehaviour
         // Allow shooting and invoking again
         _readyToShoot = true;
         allowInvoke = true;
-    }
-
-    void ResetUltimate()
-    {
-        ultimate = false;
-        Invoke("UltCoolDown", ultimateCD);
-    }
-
-    void UltCoolDown()
-    {
-        allowUlt = true;
     }
 }
