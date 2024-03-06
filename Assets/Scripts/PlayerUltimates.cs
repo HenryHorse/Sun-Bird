@@ -15,8 +15,14 @@ public class PlayerUltimates : MonoBehaviour
     public float RadialFlareDuration;
 
     public float LastUltimateCastTime { get; private set; }
-    public bool IsUltimateAvailable {
-        get => Time.time >= LastUltimateCastTime + UltimateCooldown;
+    public float UltimateCooldownTimeRemaining
+    {
+        get => LastUltimateCastTime + UltimateCooldown - Time.time;
+        set => LastUltimateCastTime += value - UltimateCooldownTimeRemaining;
+    }
+    public bool IsUltimateAvailable
+    {
+        get => UltimateCooldownTimeRemaining <= 0;
     }
 
 
