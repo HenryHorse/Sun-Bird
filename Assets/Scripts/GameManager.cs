@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public static GameManager Instance;
+
+
     public float SpawnRadius;
 
     public int CurrentScore { get; set; }
@@ -44,6 +48,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
+
         CurrentScore = 0;
         CurrentWaveTime = 0f;
         CurrentWaveIndex = 0;
@@ -52,12 +58,17 @@ public class GameManager : MonoBehaviour
         RunningSpawners = new();
         WaveInfo = GetComponent<WaveInfo>();
 
-        // temporary wave start
         StartWave(CurrentWaveIndex);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        UpdateWaveSpawns();
+        StartNextWaveIfFinished();
+    }
+
+    private void UpdateWaveSpawns()
     {
         CurrentWaveTime += Time.deltaTime;
 
@@ -75,6 +86,25 @@ public class GameManager : MonoBehaviour
             else if (spawnGroup.SpawnProgress == SpawnGroup.Progress.IN_PROGRESS)
             {
                 WaveInProgress = true;
+            }
+        }
+
+        // check if enemies are on screen
+        if (transform.childCount > 0)
+        {
+            WaveInProgress = true;
+        }
+    }
+
+    public void StartNextWaveIfFinished()
+    {
+        if (!WaveInProgress)
+        {
+            RunningSpawners.Clear();
+            if (CurrentWaveIndex < WaveInfo.Waves.Length - 1)
+            {
+                CurrentWaveIndex++;
+                StartWave(CurrentWaveIndex);
             }
         }
     }
@@ -104,7 +134,8 @@ public class GameManager : MonoBehaviour
         {
             var randomAngle = Random.Range(0f, 360f);
             var enemyPosition = Quaternion.Euler(new(0f, 0f, randomAngle)) * Vector2.up * SpawnRadius;
-            var newEnemy = Instantiate(spawnGroup.Enemy, enemyPosition, Quaternion.identity);
+            var newEnemy = Instantiate(spawnGroup.Enemy, transform, true);
+            newEnemy.transform.position = enemyPosition;
             newEnemy.GetComponent<AIChase>().player = PlayerController.Instance.gameObject;
             if (i < spawnGroup.Count - 1)
             {
