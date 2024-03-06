@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public float SpawnRadius;
 
+    public bool IsGameRunning { get; private set; }
     public int CurrentScore { get; set; }
     public int CurrentWaveIndex { get; private set; }
     public List<SpawnGroup> CurrentWave { get; private set; }
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
+        IsGameRunning = false;
         CurrentScore = 0;
         CurrentWaveTime = 0f;
         CurrentWaveIndex = 0;
@@ -64,8 +66,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateWaveSpawns();
-        StartNextWaveIfFinished();
+        if (IsGameRunning)
+        {
+            UpdateWaveSpawns();
+            StartNextWaveIfFinished();
+        }
     }
 
     private void UpdateWaveSpawns()
@@ -106,7 +111,17 @@ public class GameManager : MonoBehaviour
                 CurrentWaveIndex++;
                 StartWave(CurrentWaveIndex);
             }
+            else
+            {
+                IsGameRunning = false;
+                OnGameEnd();
+            }
         }
+    }
+
+    private void OnGameEnd()
+    {
+        Debug.Log("Game end!");
     }
 
     public void StartWave(int waveIndex)
@@ -118,6 +133,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentWave = wave;
         CurrentWaveTime = 0f;
+        IsGameRunning = true;
         WaveInProgress = true;
         foreach (var spawner in RunningSpawners)
         {

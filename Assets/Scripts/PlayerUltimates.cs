@@ -47,7 +47,6 @@ public class PlayerUltimates : MonoBehaviour
         for (int i = 0; i < RadialFlareBulletCount; i++)
         {
             var angle = anglePerBullet * i;
-            Debug.Log($"Angle: {angle}");
             var bulletDirection = Quaternion.Euler(new(0f, 0f, angle));
             var bulletVelocity = bulletDirection * Vector2.up;
             var bulletInst = Instantiate(RadialFlareBullet, transform.position, bulletDirection);
