@@ -28,7 +28,8 @@ public class CollisionHandler : MonoBehaviour
             enemyHealth -= 5f;
             StartCoroutine(DamageFlash());
             if (enemyHealth <= 0) {
-                 Destroy(gameObject);
+                Destroy(gameObject);
+                UpgradeSystem.Instance.enemyKills += 1;
             }
         }
     }

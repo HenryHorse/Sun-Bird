@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerUltimates : MonoBehaviour
+public class PlayerAbilities : MonoBehaviour
 {
+    public static PlayerAbilities Instance;
     public float UltimateCooldown;
     public bool StartOnCooldown;
 
@@ -13,6 +15,10 @@ public class PlayerUltimates : MonoBehaviour
     public int RadialFlareBulletCount;
     public float RadialFlareMaxRotations;
     public float RadialFlareDuration;
+
+    //private float FiewWaveMaxRotations = ;
+    private int FiewWaveBulletCount = 10;
+    private float FireWavesCD = 3f;
 
     public float LastUltimateCastTime { get; private set; }
     public float UltimateCooldownTimeRemaining
@@ -23,6 +29,14 @@ public class PlayerUltimates : MonoBehaviour
     public bool IsUltimateAvailable
     {
         get => UltimateCooldownTimeRemaining <= 0;
+    }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
 
@@ -55,4 +69,27 @@ public class PlayerUltimates : MonoBehaviour
         }
     }
 
+    public IEnumerator CastFireWave(int level)
+    {
+        Debug.Log(level);
+        FireWavesCD /= level;
+        while (true)
+        {
+            //if (!ReadyFireWaves)
+            //{
+            //    yield break;
+            //}
+            var anglePerBullet = 360f / FiewWaveBulletCount;
+            for (int i = 0; i < FiewWaveBulletCount; i++)
+            {
+                var angle = anglePerBullet * i;
+                var bulletDirection = Quaternion.Euler(new(0f, 0f, angle));
+                var bulletVelocity = bulletDirection * Vector2.up;
+                var bulletInst = Instantiate(RadialFlareBullet, transform.position, bulletDirection);
+                bulletInst.GetComponent<Rigidbody2D>().velocity = bulletVelocity * RadialFlareBulletForce;
+            }
+            yield return new WaitForSeconds(FireWavesCD);
+        }
+        
+    }
 }

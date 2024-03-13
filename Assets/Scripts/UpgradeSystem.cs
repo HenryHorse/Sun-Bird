@@ -1,33 +1,49 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UpgradeSystem : MonoBehaviour
 {
-    public float upgradeTime = 60f;
+    public static UpgradeSystem Instance;
+    public float upgradeNumber = 5;
+    public float enemyKills;
     public GameObject upgradeMenu;
+    public TextMeshProUGUI upgradePrompt;
+    public Dictionary<string, int> abilities = new Dictionary<string, int>();
+    private Dictionary<string, Coroutine> coroutines = new Dictionary<string, Coroutine>();
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        StartCoroutine(Upgrade());
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        
+    }
+
+    private void Start()
+    {
+        upgradePrompt.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(enemyKills >= upgradeNumber)
+        {
+            Upgrade();
+            upgradeNumber += enemyKills + 5;
+        }
+        upgradePrompt.text = "Next Upgrade: " + enemyKills + "/" + upgradeNumber;
     }
 
-    IEnumerator Upgrade()
+    void Upgrade()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(upgradeTime);
-            Time.timeScale = 0;
-            upgradeMenu.SetActive(true);
-        }
+        Time.timeScale = 0;
+        upgradeMenu.SetActive(true);
 
     }
 
@@ -43,5 +59,23 @@ public class UpgradeSystem : MonoBehaviour
         PlayerController.Instance.timeBetweenShooting /= 2;
         upgradeMenu.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void FireWave()
+    {
+        if (!abilities.ContainsKey("FireWave")){
+            abilities.Add("FireWave", 1);
+            coroutines.Add("FireWave", StartCoroutine(PlayerAbilities.Instance.CastFireWave(abilities["FireWave"])));
+        }
+        else
+        {
+            abilities["FireWave"] += 1;
+            StopCoroutine(coroutines["FireWave"]);
+            coroutines.Remove("FireWave");
+            coroutines.Add("FireWave", StartCoroutine(PlayerAbilities.Instance.CastFireWave(abilities["FireWave"])));
+        }
+        upgradeMenu.SetActive(false);
+        Time.timeScale = 1;
+
     }
 }

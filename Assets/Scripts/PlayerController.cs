@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using static UnityEditor.FilePathAttribute;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rigidbody;
     PlayerInput _playerInput;
     InputAction _moveAction;
-    PlayerUltimates _playerUltimates;
+    //PlayerAbilities _playerUltimates;
 
 
     Vector2 _move;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions["Move"];
-        _playerUltimates = GetComponent<PlayerUltimates>();
+        //_playerUltimates = GetComponent<PlayerAbilities>();
         _readyToShoot = true;
         if (Instance == null)
         {
@@ -47,20 +48,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if (_rigidbody.velocity.x != 0f)
-        //{
-        //    animator.SetBool("move", true);
-        //}
-        //else
-        //{
-        //    animator.SetBool("move", false);
-        //}
         MyInput();
         if (Keyboard.current.spaceKey.wasPressedThisFrame &&
-            _playerUltimates.IsUltimateAvailable)
+            //_playerUltimates.IsUltimateAvailable)
+            PlayerAbilities.Instance.IsUltimateAvailable)
         {
-            StartCoroutine(_playerUltimates.CastRadialFlare());
+            //StartCoroutine(_playerUltimates.CastRadialFlare());
+            StartCoroutine(PlayerAbilities.Instance.CastRadialFlare());
         }
+
+
 
     }
 
@@ -95,7 +92,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, 0, rotZ);
 
         // Shooting
-        if (_readyToShoot && _shooting)
+        if (_readyToShoot && _shooting && Time.timeScale != 0)
         {
             _bulletsShot = 0;
             _readyToShoot = false;
@@ -133,4 +130,5 @@ public class PlayerController : MonoBehaviour
         _readyToShoot = true;
         allowInvoke = true;
     }
+
 }
