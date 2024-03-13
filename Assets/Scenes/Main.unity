@@ -132,18 +132,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4436453157610752329, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.0427763
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436453157610752329, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.0427763
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436453157610752329, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.061109003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436453157610752329, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -718,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72bc3f98ebc5680459625e95f52eedea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeNumber: 1
+  upgradeNumber: 5
   enemyKills: 0
   upgradeMenu: {fileID: 1817838160}
   upgradePrompt: {fileID: 115886282}

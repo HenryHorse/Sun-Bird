@@ -71,7 +71,6 @@ public class PlayerAbilities : MonoBehaviour
 
     public IEnumerator CastFireWave(int level)
     {
-        Debug.Log(level);
         FireWavesCD /= level;
         while (true)
         {
