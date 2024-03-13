@@ -6,6 +6,7 @@ public class CollisionHandler : MonoBehaviour
 {
     private HealthBar playerHealthBar;
     public float damageAmount = 20f;
+    public float enemyHealth = 20f;
 
     void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Player")) 
@@ -18,7 +19,10 @@ public class CollisionHandler : MonoBehaviour
         {
             // Vector2 rand = new Vector2(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f));
             // transform.position = rand;
-            Destroy(gameObject);
+            enemyHealth -= 5f;
+            if (enemyHealth <= 0) {
+                 Destroy(gameObject);
+            }
         }
     }
 }
