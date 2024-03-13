@@ -5,9 +5,10 @@ using UnityEngine.InputSystem;
 public class UpgradeSystem : MonoBehaviour
 {
     public float upgradeTime = 60f;
-    // Start is called before the first frame update
-    bool update = false;
     public GameObject upgradeMenu;
+
+
+    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Upgrade());
