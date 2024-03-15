@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class UpgradeSystem : MonoBehaviour
 {
     public static UpgradeSystem Instance;
-    public float upgradeNumber = 5;
-    public float enemyKills;
+    public int upgradeNumber = 3;
+    public int enemyKills;
     public GameObject upgradeMenu;
     public TextMeshProUGUI upgradePrompt;
     public Dictionary<string, int> abilities = new Dictionary<string, int>();
@@ -35,7 +35,7 @@ public class UpgradeSystem : MonoBehaviour
         if(enemyKills >= upgradeNumber)
         {
             Upgrade();
-            upgradeNumber += enemyKills + 5;
+            upgradeNumber += (enemyKills / 3 + 3);
         }
         upgradePrompt.text = "Next Upgrade: " + enemyKills + "/" + upgradeNumber;
     }

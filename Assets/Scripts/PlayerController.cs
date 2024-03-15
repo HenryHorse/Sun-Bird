@@ -2,8 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using static UnityEditor.FilePathAttribute;
 
 public class PlayerController : MonoBehaviour
 {
