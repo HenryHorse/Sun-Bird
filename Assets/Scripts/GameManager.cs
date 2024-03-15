@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
 
 
     public float SpawnRadius;
+    public TextMeshProUGUI RoundText;
 
     public bool IsGameRunning { get; private set; }
     public int CurrentScore { get; set; }
@@ -126,6 +128,7 @@ public class GameManager : MonoBehaviour
 
     public void StartWave(int waveIndex)
     {
+        RoundText.text = $"Round: {waveIndex + 1}";
         StartWave(WaveInfo.Waves[waveIndex]);
     }
 
