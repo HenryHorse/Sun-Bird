@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28c818c98c61f42239d8834c97d7b9fa
+guid: 85a4010951b5345fa990c7f1a90626a9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Phoenix_0
+      name: Phoenix2_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 34
-        width: 21
-        height: 25
+        x: 13
+        y: 156
+        width: 49
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74c4fe639ec50436796281590234751d
-      internalID: -1445876071
+      spriteID: 9bf2d40e56ff343ab86321b702330dac
+      internalID: 1973866543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenix_1
+      name: Phoenix2_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 34
-        width: 23
-        height: 25
+        x: 83
+        y: 157
+        width: 59
+        height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70a71524879be4a3f9a6bddf6ead3121
-      internalID: 855419294
+      spriteID: 6828c328cb6fb456ab6acdf963a2ecde
+      internalID: -1261312890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phoenix_2
+      name: Phoenix2_2
       rect:
         serializedVersion: 2
         x: 7
-        y: 2
-        width: 19
-        height: 25
+        y: 82
+        width: 61
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cbf28727687f47cc95d1219f56ba52b
-      internalID: -1864457003
+      spriteID: 86ddb0e99a2284ef78109ed6b37771d7
+      internalID: -1655086503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenix2_3
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 82
+        width: 61
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126429d0e2aa5433da018bd9f862ff68
+      internalID: -523554803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenix2_4
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 6
+        width: 59
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 818feba3d8fad48d188f978db6b957ae
+      internalID: -998152421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phoenix2_5
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 6
+        width: 49
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ffa2f54658b14b1d85467aab7359ca4
+      internalID: -168827972
       vertices: []
       indices: 
       edges: []
@@ -196,9 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Phoenix_0: -1445876071
-      Phoenix_1: 855419294
-      Phoenix_2: -1864457003
+      Phoenix2_0: 1973866543
+      Phoenix2_1: -1261312890
+      Phoenix2_2: -1655086503
+      Phoenix2_3: -523554803
+      Phoenix2_4: -998152421
+      Phoenix2_5: -168827972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
