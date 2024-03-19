@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     public List<SpawnGroup> CurrentWave { get; private set; }
     public float CurrentWaveTime { get; private set; }
     public bool WaveInProgress { get; private set; }
+    public List<GameObject> Enemies { get; private set; }
 
     private List<Coroutine> RunningSpawners;
     private WaveInfo WaveInfo;
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         CurrentWaveIndex = 0;
         CurrentWave = new();
         WaveInProgress = false;
+        Enemies = new();
         RunningSpawners = new();
         WaveInfo = GetComponent<WaveInfo>();
 
@@ -97,7 +100,8 @@ public class GameManager : MonoBehaviour
         }
 
         // check if enemies are on screen
-        if (transform.childCount > 0)
+        Enemies.RemoveAll(obj => obj.IsDestroyed());
+        if (Enemies.Count > 0)
         {
             WaveInProgress = true;
         }
@@ -156,6 +160,7 @@ public class GameManager : MonoBehaviour
             var newEnemy = Instantiate(spawnGroup.Enemy, transform, true);
             newEnemy.transform.position = enemyPosition;
             newEnemy.GetComponent<AIChase>().player = PlayerController.Instance.gameObject;
+            Enemies.Add(newEnemy);
             if (i < spawnGroup.Count - 1)
             {
                 yield return new WaitForSeconds(betweenEnemies);

@@ -7,17 +7,21 @@ using UnityEngine.UI;
 
 
 
-public class HealthBar : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
 
     public Slider healthSlider;
     public float maxHealth = 100f;
-    public float currentHealth;
 
-    public SpriteRenderer spriteRenderer;
+    public float currentHealth { get; private set; }
+    public SpriteRenderer spriteRenderer { get; private set; }
+
+    public static PlayerHealth Instance { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

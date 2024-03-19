@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 7955127624397871849}
   - component: {fileID: 4577412626254241587}
   - component: {fileID: 6245517643906283418}
-  - component: {fileID: 8474637605080744839}
+  - component: {fileID: 3008033802975738767}
+  - component: {fileID: 6093076616806735983}
   - component: {fileID: -6894311139824910328}
   - component: {fileID: 5157913038516390186}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 3
---- !u!114 &8474637605080744839
+--- !u!114 &3008033802975738767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,11 +112,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 3888077473063275145}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1022a594c85699b42bebfe3dfd2a8f5e, type: 3}
+  m_Script: {fileID: 11500000, guid: b527edd94949c3b4ebc5022c17457026, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 20
-  enemyHealth: 20
+  DamageOnHit: 10
+  DestroyedOnHit: 1
+  HitCooldown: 0
+--- !u!114 &6093076616806735983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3888077473063275145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1921dc670b89a1d4d9ee5df163a92e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 20
 --- !u!95 &-6894311139824910328
 Animator:
   serializedVersion: 5

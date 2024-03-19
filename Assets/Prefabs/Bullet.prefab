@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de22035e145ac32438b5ccc950bedcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifetime: 4
+  BulletLifetime: 2
+  BulletDamage: 5
 --- !u!60 &-247312225496503458
 PolygonCollider2D:
   m_ObjectHideFlags: 0

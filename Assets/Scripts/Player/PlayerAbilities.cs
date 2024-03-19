@@ -18,9 +18,8 @@ public class PlayerAbilities : MonoBehaviour
     public float RadialFlareMaxRotations;
     public float RadialFlareDuration;
 
-    //private float FiewWaveMaxRotations = ;
-    private int FiewWaveBulletCount = 10;
-    private float FireWavesCD = 3f;
+    public int FiewWaveBulletCount;
+    public float FireWavesCD;
 
     public float LastUltimateCastTime { get; private set; }
     public float UltimateCooldownTimeRemaining
@@ -88,13 +87,9 @@ public class PlayerAbilities : MonoBehaviour
 
     public IEnumerator CastFireWave(int level)
     {
-        FireWavesCD /= level;
+        var currentCooldown = FireWavesCD / Mathf.Sqrt(level);
         while (true)
         {
-            //if (!ReadyFireWaves)
-            //{
-            //    yield break;
-            //}
             var anglePerBullet = 360f / FiewWaveBulletCount;
             for (int i = 0; i < FiewWaveBulletCount; i++)
             {
@@ -104,7 +99,7 @@ public class PlayerAbilities : MonoBehaviour
                 var bulletInst = Instantiate(RadialFlareBullet, transform.position, bulletDirection);
                 bulletInst.GetComponent<Rigidbody2D>().velocity = bulletVelocity * RadialFlareBulletForce;
             }
-            yield return new WaitForSeconds(FireWavesCD);
+            yield return new WaitForSeconds(currentCooldown);
         }
         
     }

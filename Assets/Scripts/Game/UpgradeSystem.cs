@@ -6,23 +6,11 @@ using UnityEngine.InputSystem;
 
 public class UpgradeSystem : MonoBehaviour
 {
-    public static UpgradeSystem Instance;
-    public int upgradeNumber = 3;
-    public int enemyKills;
+    public int nextUpgradeThreshold = 3;
     public GameObject upgradeMenu;
     public TextMeshProUGUI upgradePrompt;
     public Dictionary<string, int> abilities = new Dictionary<string, int>();
     private Dictionary<string, Coroutine> coroutines = new Dictionary<string, Coroutine>();
-
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        
-    }
 
     private void Start()
     {
@@ -32,12 +20,13 @@ public class UpgradeSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemyKills >= upgradeNumber)
+        var enemyKills = PlayerStats.Instance.EnemyKills;
+        if (enemyKills >= nextUpgradeThreshold)
         {
             Upgrade();
-            upgradeNumber += (enemyKills / 3 + 3);
+            nextUpgradeThreshold += (enemyKills / 3 + 3);
         }
-        upgradePrompt.text = "Next Upgrade: " + enemyKills + "/" + upgradeNumber;
+        upgradePrompt.text = "Next Upgrade: " + enemyKills + "/" + nextUpgradeThreshold;
     }
 
     void Upgrade()
