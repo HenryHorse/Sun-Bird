@@ -78,7 +78,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             var angle = anglePerBullet * i;
             var bulletDirection = Quaternion.Euler(new(0f, 0f, angle));
-            var bulletVelocity = bulletDirection * Vector2.up;
+            var bulletVelocity = bulletDirection * Vector2.right;
             var bulletInst = Instantiate(RadialFlareBullet, transform.position, bulletDirection);
             bulletInst.GetComponent<Rigidbody2D>().velocity = bulletVelocity * RadialFlareBulletForce;
             yield return new WaitForSeconds(delayPerBullet);
@@ -95,7 +95,7 @@ public class PlayerAbilities : MonoBehaviour
             {
                 var angle = anglePerBullet * i;
                 var bulletDirection = Quaternion.Euler(new(0f, 0f, angle));
-                var bulletVelocity = bulletDirection * Vector2.up;
+                var bulletVelocity = bulletDirection * Vector2.right;
                 var bulletInst = Instantiate(RadialFlareBullet, transform.position, bulletDirection);
                 bulletInst.GetComponent<Rigidbody2D>().velocity = bulletVelocity * RadialFlareBulletForce;
             }
