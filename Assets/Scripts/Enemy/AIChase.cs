@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class AIChase : MonoBehaviour
 {
-    public GameObject player;
-    public float speed;
+    public GameObject Player;
+    public float Speed;
+    public float MinDistance;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        var distance = Vector2.Distance(transform.position, player.transform.position);
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        var targetPos = Player.transform.position;
+        var direction = (transform.position - targetPos).normalized;
+        var targetDisplacement = direction * MinDistance;
+        transform.position = Vector2.MoveTowards(transform.position, targetPos + targetDisplacement, Speed * Time.fixedDeltaTime);
     }
 }

@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             var enemyPosition = Quaternion.Euler(new(0f, 0f, randomAngle)) * Vector2.up * SpawnRadius;
             var newEnemy = Instantiate(spawnGroup.Enemy, transform, true);
             newEnemy.transform.position = enemyPosition;
-            newEnemy.GetComponent<AIChase>().player = PlayerController.Instance.gameObject;
+            newEnemy.GetComponent<AIChase>().Player = PlayerController.Instance.gameObject;
             Enemies.Add(newEnemy);
             if (i < spawnGroup.Count - 1)
             {
