@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
+using UnityEngine.UI;
 
 public class PlayerAbilities : MonoBehaviour
 {
     public static PlayerAbilities Instance;
     public float UltimateCooldown;
     public bool StartOnCooldown;
-    public TextMeshProUGUI UltimateText;
+    public Image UltimateCooldownImage;
 
     public GameObject RadialFlareBullet;
     public float RadialFlareBulletForce;
@@ -52,15 +52,15 @@ public class PlayerAbilities : MonoBehaviour
 
     private void Update()
     {
-        if (UltimateText != null)
+        if (UltimateCooldownImage != null)
         {
             if (IsUltimateAvailable)
             {
-                UltimateText.text = "Ultimate available!";
+                UltimateCooldownImage.fillAmount = 0f;
             }
             else
             {
-                UltimateText.text = $"Ultimate in {(int)(UltimateCooldownTimeRemaining + 1)}...";
+                UltimateCooldownImage.fillAmount = UltimateCooldownTimeRemaining / UltimateCooldown;
             }
         }
     }

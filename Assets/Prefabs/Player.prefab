@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0427763, y: 0.0427763, z: 0.061109003}
+  m_LocalScale: {x: 0.0277763, y: 0.0277763, z: 0.061109003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -182,14 +182,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UltimateCooldown: 30
   StartOnCooldown: 0
-  UltimateText: {fileID: 0}
+  UltimateCooldownImage: {fileID: 0}
   RadialFlareBullet: {fileID: 6576326681740064337, guid: ae513ae3b944d924caa08a285783be88, type: 3}
   RadialFlareBulletForce: 10
   RadialFlareBulletCount: 100
   RadialFlareMaxRotations: 3
   RadialFlareDuration: 2
-  FiewWaveBulletCount: 0
-  FireWavesCD: 0
+  FiewWaveBulletCount: 10
+  FireWavesCD: 2
 --- !u!114 &6668781788352954930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,20 +269,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 24.5, y: 2}
-      - {x: 8.5, y: 12}
-      - {x: 5.5, y: 30}
-      - {x: 2.5, y: 33}
-      - {x: -7.5, y: 33}
-      - {x: -19.5, y: 13}
-      - {x: -24.5, y: 2}
-      - {x: -24.5, y: -10}
-      - {x: -17.5, y: -13}
-      - {x: -8.5, y: -33}
-      - {x: 8.5, y: -33}
-      - {x: 11.5, y: -31}
-      - {x: 21.5, y: -11}
-      - {x: 24.5, y: -9}
+    - - {x: 25.14861, y: -2.5402877}
+      - {x: 20.100666, y: 1.5132895}
+      - {x: 14.973845, y: 4.0697956}
+      - {x: 8.175693, y: 9.0812435}
+      - {x: 4.478239, y: 11.822013}
+      - {x: 3.5854106, y: 26.99136}
+      - {x: -0.23512721, y: 33.547028}
+      - {x: -2.5767717, y: 26.4357}
+      - {x: -3.604006, y: 15.992161}
+      - {x: -3.235437, y: 7.0804954}
+      - {x: -14.029748, y: 5.0681324}
+      - {x: -23.952974, y: -2.1026907}
+      - {x: -17.388672, y: -7.811899}
+      - {x: -2.581914, y: -9.108322}
+      - {x: -8.175693, y: -27.811104}
+      - {x: -1.9257771, y: -32.67461}
+      - {x: 3.3110962, y: -32.675694}
+      - {x: 6.959715, y: -29.054161}
+      - {x: 2.690237, y: -7.4326305}
+      - {x: 22.554157, y: -7.702776}
   m_UseDelaunayMesh: 0
 --- !u!114 &1617910436555141708
 MonoBehaviour:
