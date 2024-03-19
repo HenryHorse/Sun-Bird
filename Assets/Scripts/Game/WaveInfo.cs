@@ -5,6 +5,8 @@ using UnityEngine;
 public class WaveInfo : MonoBehaviour
 {
     public GameObject BasicEnemy;
+    public GameObject RangedEnemy;
+    public GameObject TankyEnemy;
 
 
     public List<GameManager.SpawnGroup>[] Waves;
@@ -20,12 +22,15 @@ public class WaveInfo : MonoBehaviour
             }),
             new(new GameManager.SpawnGroup[] {
                 new(BasicEnemy, 10, 20f, 0f),
-                new(BasicEnemy, 20, 20f, 20f),
+                new(BasicEnemy, 10, 20f, 20f),
+                new(RangedEnemy, 10, 20f, 20f),
                 new(BasicEnemy, 20, 5f, 40f),
             }),
             new(new GameManager.SpawnGroup[] {
+                new(TankyEnemy, 10, 40f, 0f),
                 new(BasicEnemy, 30, 20f, 0f),
-                new(BasicEnemy, 60, 20f, 20f),
+                new(BasicEnemy, 30, 20f, 20f),
+                new(RangedEnemy, 30, 20f, 20f),
                 new(BasicEnemy, 60, 5f, 40f),
             }),
         };
