@@ -78,6 +78,10 @@ public class BackgroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.CurrentWaveIndex == 1) 
+        {
+            movementSpeed = 5f;
+        }
         foreach (GameObject backgroundObject in GameObject.FindGameObjectsWithTag("BackgroundObject"))
         {
             backgroundObject.transform.Translate(Vector3.down * movementSpeed * Time.deltaTime);
