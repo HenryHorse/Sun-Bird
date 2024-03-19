@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 public class BackgroundManager : MonoBehaviour
 {
     public GameObject[] clouds;
+    public GameObject[] stars;
+    public GameObject earth;
     public float cloudInterval = 2f;
     public float movementSpeed = 1f;
     public float despawnDistance = 2f;
@@ -27,19 +29,47 @@ public class BackgroundManager : MonoBehaviour
         gameManager = GetComponent<GameManager>();
         currentColor = initialSkyColor;
         skySprite = sky.GetComponent<SpriteRenderer>();
-        StartCoroutine(CreateClouds());
+        StartCoroutine(moveEarth());
+        
+
     }
 
-    IEnumerator CreateClouds()
+
+    IEnumerator moveEarth()
+    {
+        while (earth != null) {
+            earth.transform.Translate(Vector3.down * 1f * Time.deltaTime);
+            if (earth.transform.position.y < mainCamera.ViewportToWorldPoint(Vector3.zero).y - 10f)
+            {
+                Destroy(earth);
+            }
+            yield return null;
+        }
+        StartCoroutine(CreateBackgroundObjects());
+    }
+    IEnumerator CreateBackgroundObjects()
     {
         while (true)
         {
             float randomX = Random.Range(mainCamera.ViewportToWorldPoint(new Vector2(0, 1)).x, 
                                         mainCamera.ViewportToWorldPoint(new Vector2(1, 1)).x);
             Vector3 spawnPoint = new Vector3(randomX, mainCamera.transform.position.y + 6, 1);
+            GameObject randomBackgroundObject;
 
-            GameObject randomCloud = clouds[Random.Range(0, clouds.Length)];
-            Instantiate(randomCloud, spawnPoint, Quaternion.identity);
+            if (GameManager.Instance.CurrentWaveIndex == 0)
+            {
+                randomBackgroundObject = clouds[Random.Range(0, clouds.Length)];
+            }
+            else if (GameManager.Instance.CurrentWaveIndex == 1) 
+            {
+                randomBackgroundObject = stars[Random.Range(0, clouds.Length)];
+            }
+            else 
+            {
+                randomBackgroundObject = stars[Random.Range(0, clouds.Length)];
+            }
+
+            Instantiate(randomBackgroundObject, spawnPoint, Quaternion.identity);
 
             yield return new WaitForSeconds(cloudInterval);
 
@@ -48,19 +78,19 @@ public class BackgroundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject cloud in GameObject.FindGameObjectsWithTag("Cloud"))
+        foreach (GameObject backgroundObject in GameObject.FindGameObjectsWithTag("BackgroundObject"))
         {
-            cloud.transform.Translate(Vector3.down * movementSpeed * Time.deltaTime);
+            backgroundObject.transform.Translate(Vector3.down * movementSpeed * Time.deltaTime);
 
-            if (cloud.transform.position.y < mainCamera.ViewportToWorldPoint(Vector3.zero).y - despawnDistance)
+            if (backgroundObject.transform.position.y < mainCamera.ViewportToWorldPoint(Vector3.zero).y - despawnDistance)
             {
-                Destroy(cloud);
+                Destroy(backgroundObject);
             }
         }
 
         if (skyChangeTimer < skyChangeDuration)
         {
-            currentColor = Color.Lerp(currentColor, endSkyColor, skyChangeTimer / skyChangeDuration);
+            currentColor = Color.Lerp(initialSkyColor, endSkyColor, skyChangeTimer / skyChangeDuration);
             skySprite.color = currentColor;
 
             skyChangeTimer += Time.deltaTime;
