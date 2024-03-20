@@ -27,11 +27,11 @@ public class WaveInfo : MonoBehaviour
                 new(BasicEnemy, 20, 5f, 40f),
             }),
             new(new GameManager.SpawnGroup[] {
-                new(TankyEnemy, 10, 40f, 0f),
-                new(BasicEnemy, 30, 20f, 0f),
-                new(BasicEnemy, 30, 20f, 20f),
-                new(RangedEnemy, 30, 20f, 20f),
-                new(BasicEnemy, 60, 5f, 40f),
+                new(TankyEnemy, 7, 40f, 0f),
+                new(BasicEnemy, 20, 20f, 0f),
+                new(BasicEnemy, 20, 20f, 20f),
+                new(RangedEnemy, 20, 20f, 20f),
+                new(BasicEnemy, 40, 5f, 40f),
             }),
         };
     }
