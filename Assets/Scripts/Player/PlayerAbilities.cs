@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.FilePathAttribute;
 
 public class PlayerAbilities : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class PlayerAbilities : MonoBehaviour
 
     public int FiewWaveBulletCount;
     public float FireWavesCD;
+
+
+    public float FireBombCD;
+    public float searchRadius = 3f;
+    public GameObject FireBomb;
 
     public float LastUltimateCastTime { get; private set; }
     public float UltimateCooldownTimeRemaining
@@ -102,5 +108,48 @@ public class PlayerAbilities : MonoBehaviour
             yield return new WaitForSeconds(currentCooldown);
         }
         
+    }
+
+    public IEnumerator CastFireBomb(int level)
+    {
+        var currentCooldown = FireBombCD / Mathf.Sqrt(level);    
+        while (true)
+        {
+            int highestDensity = 0;
+            GameObject targetEnemy = null;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                int currentDensity = 1;
+                Vector3 enemyPosition = enemy.transform.position;
+
+                foreach (GameObject other in enemies)
+                {
+                    if (enemy == other) continue;
+
+                    float distance = Vector3.Distance(enemyPosition, other.transform.position);
+                    if(distance < searchRadius)
+                    {
+                        currentDensity++;
+                    }
+                }
+                if(currentDensity > highestDensity)
+                {
+                    highestDensity = currentDensity;
+                    targetEnemy = enemy;
+                }
+            }
+           
+            if (targetEnemy != null)
+            {
+                Vector3 direction = targetEnemy.transform.position - transform.position;
+                float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                Quaternion rotation = Quaternion.Euler(0, 0, rotZ);
+                GameObject fireBomb = Instantiate(FireBomb, transform.position, rotation);
+                fireBomb.GetComponent<Rigidbody2D>().velocity = new Vector2(direction.x, direction.y).normalized * 10f;
+            }
+            yield return new WaitForSeconds(currentCooldown);
+        }
+
     }
 }
