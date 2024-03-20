@@ -31,19 +31,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public enum GameStatus
+    {
+        Stopped,
+        InNormalWave,
+        InBossFight,
+    }
+
 
     public static GameManager Instance;
 
 
     public float SpawnRadius;
     public TextMeshProUGUI RoundText;
+    public Camera Camera;
+    public GameObject DraculaPrefab;
+    public GameObject DraculaDescentTarget;
 
-    public bool IsGameRunning { get; private set; }
+    public GameStatus CurrentStatus { get; private set; }
     public int CurrentScore { get; set; }
     public int CurrentWaveIndex { get; private set; }
     public List<SpawnGroup> CurrentWave { get; private set; }
     public float CurrentWaveTime { get; private set; }
-    public bool WaveInProgress { get; private set; }
     public List<GameObject> Enemies { get; private set; }
 
     private List<Coroutine> RunningSpawners;
@@ -55,23 +64,24 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
-        IsGameRunning = false;
+        CurrentStatus = GameStatus.Stopped;
         CurrentScore = 0;
         CurrentWaveTime = 0f;
         CurrentWaveIndex = 0;
         CurrentWave = new();
-        WaveInProgress = false;
         Enemies = new();
         RunningSpawners = new();
         WaveInfo = GetComponent<WaveInfo>();
 
+        MusicController.Instance.PlayWaveMusic();
         StartWave(CurrentWaveIndex);
+        // StartCoroutine(StartBossRound());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsGameRunning)
+        if (CurrentStatus == GameStatus.InNormalWave)
         {
             UpdateWaveSpawns();
             StartNextWaveIfFinished();
@@ -82,12 +92,12 @@ public class GameManager : MonoBehaviour
     {
         CurrentWaveTime += Time.deltaTime;
 
-        WaveInProgress = false;
+        var waveInProgress = false;
         foreach (var spawnGroup in CurrentWave)
         {
             if (spawnGroup.SpawnProgress == SpawnGroup.Progress.NONE)
             {
-                WaveInProgress = true;
+                waveInProgress = true;
                 if (CurrentWaveTime > spawnGroup.Time)
                 {
                     RunningSpawners.Add(StartCoroutine(SpawnEnemies(spawnGroup)));
@@ -95,7 +105,7 @@ public class GameManager : MonoBehaviour
             }
             else if (spawnGroup.SpawnProgress == SpawnGroup.Progress.IN_PROGRESS)
             {
-                WaveInProgress = true;
+                waveInProgress = true;
             }
         }
 
@@ -103,13 +113,18 @@ public class GameManager : MonoBehaviour
         Enemies.RemoveAll(obj => obj.IsDestroyed());
         if (Enemies.Count > 0)
         {
-            WaveInProgress = true;
+            waveInProgress = true;
+        }
+
+        if (!waveInProgress)
+        {
+            CurrentStatus = GameStatus.Stopped;
         }
     }
 
     public void StartNextWaveIfFinished()
     {
-        if (!WaveInProgress)
+        if (CurrentStatus == GameStatus.Stopped)
         {
             RunningSpawners.Clear();
             if (CurrentWaveIndex < WaveInfo.Waves.Length - 1)
@@ -119,15 +134,9 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                IsGameRunning = false;
-                OnGameEnd();
+                StartCoroutine(StartBossRound());
             }
         }
-    }
-
-    private void OnGameEnd()
-    {
-        Debug.Log("Game end!");
     }
 
     public void StartWave(int waveIndex)
@@ -138,10 +147,9 @@ public class GameManager : MonoBehaviour
 
     public void StartWave(List<SpawnGroup> wave)
     {
+        CurrentStatus = GameStatus.InNormalWave;
         CurrentWave = wave;
         CurrentWaveTime = 0f;
-        IsGameRunning = true;
-        WaveInProgress = true;
         foreach (var spawner in RunningSpawners)
         {
             StopCoroutine(spawner);
@@ -170,5 +178,18 @@ public class GameManager : MonoBehaviour
                 spawnGroup.SpawnProgress = SpawnGroup.Progress.DONE;
             }
         }
+    }
+
+    private IEnumerator StartBossRound()
+    {
+        RoundText.text = $"Round: ???";
+        MusicController.Instance.PlayBossMusic();
+        yield return new WaitForSeconds(12f);
+        var dracula = Instantiate(DraculaPrefab, transform, true);
+        var startY = Camera.ViewportToWorldPoint(new(1, 1, Camera.nearClipPlane)).y + 2f;
+        dracula.transform.position = new Vector3(0, startY, dracula.transform.position.z);
+        dracula.GetComponent<DraculaController>().DescentTarget = DraculaDescentTarget;
+        yield return new WaitForSeconds(1.5f);
+        RoundText.text = $"Round: BOSS";
     }
 }

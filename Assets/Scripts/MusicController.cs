@@ -14,12 +14,7 @@ public class MusicController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    void Start()
-    {
         Player = GetComponent<AudioSource>();
-        PlayWaveMusic();
     }
 
     public void PlayWaveMusic()
