@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.FilePathAttribute;
 
 public class PlayerAbilities : MonoBehaviour
 {
