@@ -13,8 +13,11 @@ public class DraculaSlash : MonoBehaviour
 
     public float SlashDamage;
 
+    public AudioClip SlashSound;
+
     public SpriteRenderer Sprite { get; private set; }
     public BoxCollider2D Collider { get; private set; }
+    public AudioSource Audio { get; private set; }
 
     public int PlayerLayerMask { get; private set; }
 
@@ -23,6 +26,7 @@ public class DraculaSlash : MonoBehaviour
     {
         Sprite = GetComponent<SpriteRenderer>();
         Collider = GetComponent<BoxCollider2D>();
+        Audio = GetComponent<AudioSource>();
         PlayerLayerMask = LayerMask.GetMask("Player");
     }
 
@@ -44,6 +48,8 @@ public class DraculaSlash : MonoBehaviour
             Sprite.color = Color.Lerp(startColor, endColor, t);
             yield return null;
         }
+
+        Audio.PlayOneShot(SlashSound);
 
         if (Collider.IsTouchingLayers(PlayerLayerMask))
         {

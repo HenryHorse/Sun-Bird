@@ -256,14 +256,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8443886877572804999, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
-      propertyPath: FireBomb
-      value: 
-      objectReference: {fileID: 2749182906019909149, guid: 0b7a2713546eae043b0f31b04726669b, type: 3}
-    - target: {fileID: 8443886877572804999, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
-      propertyPath: FireBombCD
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8443886877572804999, guid: 2ac890d86369a4028ab5e988afa09700, type: 3}
       propertyPath: UltimateText
       value: 
       objectReference: {fileID: 0}

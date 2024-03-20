@@ -28,10 +28,11 @@ public class PlayerHealth : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        if (healthSlider.value != currentHealth) 
+    {
+        var healthBarVal = currentHealth * 100f / maxHealth;
+        if (healthSlider.value != healthBarVal) 
         {
-            healthSlider.value = currentHealth;
+            healthSlider.value = healthBarVal;
         }
         if (currentHealth <= 0) 
         {

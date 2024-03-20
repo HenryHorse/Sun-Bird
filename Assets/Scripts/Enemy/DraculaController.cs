@@ -32,6 +32,8 @@ public class DraculaController : MonoBehaviour
 
     public GameObject SliceAttackPrefab;
 
+    public AudioClip DashSound;
+
     public GameObject DescentTarget { get; set; }
     public GameManager Spawner { get; set; }
 
@@ -39,11 +41,13 @@ public class DraculaController : MonoBehaviour
     public Attacks CurrentAttack { get; private set; }
 
     public EnemyHealth Health { get; private set; }
+    public AudioSource Audio { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
         Health = GetComponent<EnemyHealth>();
+        Audio = GetComponent<AudioSource>();
         StartCoroutine(Descend());
     }
 
@@ -135,6 +139,8 @@ public class DraculaController : MonoBehaviour
             transform.position = Vector3.Lerp(originalPos, backupPos, t);
             yield return null;
         }
+
+        Audio.PlayOneShot(DashSound);
 
         startTime = Time.time;
         while (Time.time < startTime + LungeAttackTime)

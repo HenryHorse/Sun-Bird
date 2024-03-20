@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rigidbody;
     PlayerInput _playerInput;
     InputAction _moveAction;
+    AudioSource _audioSource;
     //PlayerAbilities _playerUltimates;
 
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         _moveAction = _playerInput.actions["Move"];
+        _audioSource = GetComponent<AudioSource>();
         //_playerUltimates = GetComponent<PlayerAbilities>();
         _readyToShoot = true;
         if (Instance == null)
@@ -127,6 +129,11 @@ public class PlayerController : MonoBehaviour
         // Allow shooting and invoking again
         _readyToShoot = true;
         allowInvoke = true;
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
     }
 
 }

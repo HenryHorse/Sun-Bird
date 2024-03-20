@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -198,6 +199,7 @@ public class GameManager : MonoBehaviour
         dracula.DescentTarget = DraculaDescentTarget;
         dracula.Spawner = this;
         Enemies.Add(dracula.gameObject);
+        CurrentStatus = GameStatus.InBossFight;
         yield return new WaitForSeconds(1.5f);
         RoundText.text = $"Round: BOSS";
     }
@@ -208,7 +210,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(enemy);
         }
-        Debug.Log("yay");
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Victory");
         yield return null;
     }
 }

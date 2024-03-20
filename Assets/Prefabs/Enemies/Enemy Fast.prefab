@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  KillSound: {fileID: 8300000, guid: 72f6f619975c83a4b9cebd52a7f28fc4, type: 3}
 --- !u!95 &-2126177205538731288
 Animator:
   serializedVersion: 5

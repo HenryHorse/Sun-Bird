@@ -173,6 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletLifetime: 2
   BulletDamage: 5
-  ExplosionRadius: 3
-  ExplosionDamage: 3
+  ExplosionRadius: 4
+  ExplosionDamage: 10
   explosion: {fileID: 1110556030845387871, guid: f91edac4d13fc4343ba96bb6a843ad05, type: 3}

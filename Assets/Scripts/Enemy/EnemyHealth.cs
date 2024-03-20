@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float MaxHealth;
+    public AudioClip KillSound;
 
     public float CurrentHealth { get; private set; }
     public SpriteRenderer Sprite { get; private set; }
@@ -30,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             PlayerStats.Instance.EnemyKills++;
+            PlayerController.Instance.PlaySound(KillSound);
             Destroy(gameObject);
         }
         StartCoroutine(DamageFlash());

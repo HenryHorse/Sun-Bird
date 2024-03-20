@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 15
+  KillSound: {fileID: 8300000, guid: 72f6f619975c83a4b9cebd52a7f28fc4, type: 3}
 --- !u!114 &6925722140675541351
 MonoBehaviour:
   m_ObjectHideFlags: 0
