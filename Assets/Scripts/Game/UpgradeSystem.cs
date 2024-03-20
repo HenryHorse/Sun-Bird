@@ -33,11 +33,18 @@ public class UpgradeSystem : MonoBehaviour
     {
         Time.timeScale = 0;
         upgradeMenu.SetActive(true);
-
     }
 
     public void IncreaseBullets()
     {
+        if (!abilities.ContainsKey("MoreBullets"))
+        {
+            abilities.Add("MoreBullets", 1);
+        }
+        else
+        {
+            abilities["MoreBullets"] += 1;
+        }
         PlayerController.Instance.bulletsPerTap++;
         upgradeMenu.SetActive(false);
         Time.timeScale = 1;
@@ -45,6 +52,14 @@ public class UpgradeSystem : MonoBehaviour
 
     public void DecreaseShootingTime()
     {
+        if (!abilities.ContainsKey("SpeedUp"))
+        {
+            abilities.Add("SpeedUp", 1);
+        }
+        else
+        {
+            abilities["SpeedUp"] += 1;
+        }
         PlayerController.Instance.timeBetweenShooting /= 2;
         upgradeMenu.SetActive(false);
         Time.timeScale = 1;
@@ -66,5 +81,23 @@ public class UpgradeSystem : MonoBehaviour
         upgradeMenu.SetActive(false);
         Time.timeScale = 1;
 
+    }
+
+    public void FireBomb()
+    {
+        if (!abilities.ContainsKey("FireBomb"))
+        {
+            abilities.Add("FireBomb", 1);
+            coroutines.Add("FireBomb", StartCoroutine(PlayerAbilities.Instance.CastFireBomb(abilities["FireBomb"])));
+        }
+        else
+        {
+            abilities["FireBomb"] += 1;
+            StopCoroutine(coroutines["FireBomb"]);
+            coroutines.Remove("FireBomb");
+            coroutines.Add("FireBomb", StartCoroutine(PlayerAbilities.Instance.CastFireBomb(abilities["FireBomb"])));
+        }
+        upgradeMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 }
