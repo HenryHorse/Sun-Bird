@@ -15,6 +15,8 @@ public class MusicController : MonoBehaviour
     {
         Instance = this;
         Player = GetComponent<AudioSource>();
+        WaveMusic.LoadAudioData();
+        BossMusic.LoadAudioData();
     }
 
     public void PlayWaveMusic()

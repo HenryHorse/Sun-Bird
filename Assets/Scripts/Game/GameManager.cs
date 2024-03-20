@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     public float SpawnRadius;
     public TextMeshProUGUI RoundText;
     public Camera Camera;
-    public GameObject DraculaPrefab;
+    public DraculaController DraculaPrefab;
     public GameObject DraculaDescentTarget;
 
     public GameStatus CurrentStatus { get; private set; }
@@ -81,10 +81,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Enemies.RemoveAll(obj => obj.IsDestroyed());
         if (CurrentStatus == GameStatus.InNormalWave)
         {
             UpdateWaveSpawns();
             StartNextWaveIfFinished();
+        }
+        else if (CurrentStatus == GameStatus.InBossFight)
+        {
+            if (Enemies.Count == 0)
+            {
+                StartCoroutine(EndBossRound());
+            }
         }
     }
 
@@ -110,7 +118,6 @@ public class GameManager : MonoBehaviour
         }
 
         // check if enemies are on screen
-        Enemies.RemoveAll(obj => obj.IsDestroyed());
         if (Enemies.Count > 0)
         {
             waveInProgress = true;
@@ -188,8 +195,20 @@ public class GameManager : MonoBehaviour
         var dracula = Instantiate(DraculaPrefab, transform, true);
         var startY = Camera.ViewportToWorldPoint(new(1, 1, Camera.nearClipPlane)).y + 2f;
         dracula.transform.position = new Vector3(0, startY, dracula.transform.position.z);
-        dracula.GetComponent<DraculaController>().DescentTarget = DraculaDescentTarget;
+        dracula.DescentTarget = DraculaDescentTarget;
+        dracula.Spawner = this;
+        Enemies.Add(dracula.gameObject);
         yield return new WaitForSeconds(1.5f);
         RoundText.text = $"Round: BOSS";
+    }
+
+    private IEnumerator EndBossRound()
+    {
+        foreach (var enemy in Enemies)
+        {
+            Destroy(enemy);
+        }
+        Debug.Log("yay");
+        yield return null;
     }
 }

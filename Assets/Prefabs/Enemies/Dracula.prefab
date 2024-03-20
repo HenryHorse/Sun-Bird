@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 287472624379440892}
   - component: {fileID: 7679703061292482470}
   - component: {fileID: 1907512770656552906}
+  - component: {fileID: 3957890873871302934}
   m_Layer: 8
   m_Name: Dracula
   m_TagString: Enemy
@@ -227,4 +228,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9dd7ec461f9da4984aed3e8b780557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DescentTime: 14
+  DescentTime: 3
+  LungeWindupTime: 1
+  LungeAttackTime: 0.3
+  LungeReturnTime: 1
+  EnemyBasic: {fileID: 3888077473063275145, guid: b84245073b0fe6e4c8d2a43525795ffc, type: 3}
+  EnemyFast: {fileID: 4686986359632835399, guid: 03279cdae7480994196d8af16b5f8f94, type: 3}
+  EnemyRanged: {fileID: 5112224590311195589, guid: eaaa52d598d63854583a9577e06e8d73, type: 3}
+  EnemyTanky: {fileID: 1695271067029632465, guid: d69d4404255263245950a26afe77789e, type: 3}
+  SliceAttackPrefab: {fileID: 341869017237482483, guid: 64d6de322e7e37a4dac22d6043f489cf, type: 3}
+--- !u!114 &3957890873871302934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670486514143604715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b527edd94949c3b4ebc5022c17457026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageOnHit: 20
+  DestroyedOnHit: 0
+  HitCooldown: 1

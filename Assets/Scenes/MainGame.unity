@@ -578,7 +578,7 @@ MonoBehaviour:
   SpawnRadius: 10
   RoundText: {fileID: 1412985854}
   Camera: {fileID: 1401875309}
-  DraculaPrefab: {fileID: 6670486514143604715, guid: 47514b916b0d14756bb3c567eb347a4e, type: 3}
+  DraculaPrefab: {fileID: 1907512770656552906, guid: 47514b916b0d14756bb3c567eb347a4e, type: 3}
   DraculaDescentTarget: {fileID: 253158814}
 --- !u!114 &505794917
 MonoBehaviour:
